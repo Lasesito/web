@@ -1,0 +1,475 @@
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Oak Camp - Aventura en Vanuatu</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <div class="logo-animation">
+          <img src="https://static.vecteezy.com/system/resources/previews/024/054/134/non_2x/angry-north-american-beaver-or-eurasian-beaver-biting-log-head-mascot-retro-vector.jpg" alt="Golden Oak Beaver Logo" class="beaver-logo">
+        </div>
+        <a href="index.html" style="text-decoration: none; color: inherit;">Golden Oak Camp</a>
+      </div>
+      <div class="nav-links">
+        <a href="#hero">Inicio</a>
+        <a href="#programa">Programa</a>
+        <a href="#excursiones">Excursiones</a>
+        <a href="#deportes">Deportes</a>
+        <a href="#precios">Precios</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#tienda">Tienda</a>
+        <div class="auth-buttons">
+          <button onclick="openModal('login')" class="login-btn">Iniciar Sesión</button>
+          <button onclick="openModal('register')" class="register-btn">Registrarse</button>
+          <button class="user-profile-btn" onclick="toggleProfileDropdown()" style="display: none;">
+            <i class="fas fa-user user-profile-icon"></i>
+            <div class="user-profile-dropdown">
+              <ul>
+                <li><a href="#" onclick="editProfile()">Editar Perfil</a></li>
+                <li><a href="#" onclick="changePassword()">Cambiar Contraseña</a></li>
+                <li><a href="#" onclick="viewBookings()">Mis Reservas</a></li>
+                <li><a href="#" onclick="logout()">Cerrar Sesión</a></li>
+              </ul>
+            </div>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="auth-welcome" style="display: none;">
+    <h1>🌟 Bienvenido a Golden Oak Camp 🌟</h1>
+    <p class="auth-subtitle">Tu aventura en Vanuatu comienza aquí</p>
+    
+    <div class="auth-features">
+      <div class="feature-card">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>Inmersión en Inglés</h3>
+        <p>Aprende inglés con profesores nativos mientras vives una aventura única</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-mountain"></i>
+        <h3>Aventuras Increíbles</h3>
+        <p>Volcanes activos, arrecifes de coral y selvas tropicales</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-users"></i>
+        <h3>Amigos Internacionales</h3>
+        <p>Conoce estudiantes de todo el mundo en un ambiente multicultural</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Seguridad Garantizada</h3>
+        <p>Supervisión 24/7 y personal médico en el campus</p>
+      </div>
+    </div>
+
+    <div class="camp-preview">
+      <h2>Un Vistazo a Tu Próxima Aventura</h2>
+      <div class="preview-gallery">
+        <div class="preview-image">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5" alt="Snorkel en Vanuatu">
+          <div class="preview-caption">Explora arrecifes de coral prístinos</div>
+        </div>
+        <div class="preview-image">
+          <img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86" alt="Volcán Monte Yasur">
+          <div class="preview-caption">Visita el volcán activo más accesible del mundo</div>
+        </div>
+        <div class="preview-image">
+          <img src="https://images.unsplash.com/photo-1551632811-561732d1e306" alt="Actividades en la playa">
+          <div class="preview-caption">Disfruta de actividades deportivas y culturales</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-buttons">
+      <button onclick="openModal('login')" class="login-btn">
+        <span>Iniciar Sesión <i class="fas fa-sign-in-alt"></i></span>
+      </button>
+      <button onclick="openModal('register')" class="register-btn">
+        <span>Registrarse <i class="fas fa-user-plus"></i></span>
+      </button>
+    </div>
+  </div>
+
+  <main>
+    <section id="hero">
+      <h1>¡Descubre Vanuatu con Golden Oak Camp!</h1>
+      <p>Una experiencia única de inmersión en inglés en el paraíso del Pacífico Sur</p>
+      <button onclick="openModal('info')" class="info-btn">Más Información</button>
+    </section>
+
+    <section id="programa">
+      <h2>Nuestro Programa</h2>
+      <div class="programa-info">
+        <div class="info-card">
+          <i class="fas fa-map-marker-alt"></i>
+          <h3>Ubicación</h3>
+          <p>Port Vila, Vanuatu</p>
+        </div>
+        <div class="info-card">
+          <i class="fas fa-calendar-alt"></i>
+          <h3>Duración</h3>
+          <p>7 días</p>
+        </div>
+        <div class="info-card">
+          <i class="fas fa-users"></i>
+          <h3>Edades</h3>
+          <p>De 14 a 18 años</p>
+        </div>
+      </div>
+
+      <div class="horario">
+        <h3>Horario Diario</h3>
+        <table>
+          <tr>
+            <th>Hora</th>
+            <th>Actividad</th>
+          </tr>
+          <tr>
+            <td>08:00</td>
+            <td>Despertar y aseo</td>
+          </tr>
+          <tr>
+            <td>08:30</td>
+            <td>Desayuno</td>
+          </tr>
+          <tr>
+            <td>09:30</td>
+            <td>Clases de inglés</td>
+          </tr>
+          <tr>
+            <td>11:30</td>
+            <td>Actividades deportivas</td>
+          </tr>
+          <tr>
+            <td>13:30</td>
+            <td>Almuerzo</td>
+          </tr>
+          <tr>
+            <td>15:00</td>
+            <td>Excursiones/Actividades</td>
+          </tr>
+          <tr>
+            <td>19:00</td>
+            <td>Tiempo libre/Duchas</td>
+          </tr>
+          <tr>
+            <td>20:00</td>
+            <td>Cena</td>
+          </tr>
+          <tr>
+            <td>21:00</td>
+            <td>Actividades nocturnas</td>
+          </tr>
+          <tr>
+            <td>22:30</td>
+            <td>Dormir</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="excursiones">
+      <h2>Excursiones en Vanuatu</h2>
+      <div class="excursiones-grid">
+        <div class="excursion-card">
+          <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd" alt="Museo Nacional de Vanuatu">
+          <h3>Museo Nacional de Vanuatu</h3>
+          <p>Explora la fascinante historia y cultura de Vanuatu a través de sus artefactos y exhibiciones. Guías locales nos enseñarán en inglés sobre la rica herencia del país.</p>
+        </div>
+        <div class="excursion-card">
+          <img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86" alt="Volcán Monte Yasur">
+          <h3>Volcán Monte Yasur</h3>
+          <p>Excursión al volcán activo más accesible del mundo. Aprenderemos sobre geología y vulcanología mientras practicamos inglés en un entorno único.</p>
+        </div>
+        <div class="excursion-card">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5" alt="Buceo en Blue Holes">
+          <h3>Blue Holes de Espíritu Santo</h3>
+          <p>Visita a las cristalinas piscinas naturales de agua dulce. Actividades de snorkel y educación sobre el ecosistema marino.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="deportes">
+      <h2>Actividades Acuáticas y Deportivas</h2>
+      <div class="deportes-grid">
+        <div class="deporte-card">
+          <img src="https://images.unsplash.com/photo-1544551763-8dd44758c2dd" alt="Snorkel">
+          <h3>Snorkel y Buceo</h3>
+          <p>Explora los arrecifes de coral más prístinos del Pacífico</p>
+        </div>
+        <div class="deporte-card">
+          <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1" alt="Voleibol Playa">
+          <h3>Voleibol Playa</h3>
+          <p>Disfruta de emocionantes partidos en nuestras playas paradisíacas mientras practicas inglés con otros campistas en un ambiente divertido y deportivo</p>
+        </div>
+        <div class="deporte-card">
+          <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f" alt="Surf">
+          <h3>Surf</h3>
+          <p>Clases de surf en las mejores playas</p>
+        </div>
+        <div class="deporte-card">
+          <img src="https://images.unsplash.com/photo-1551632811-561732d1e306" alt="Senderismo">
+          <h3>Senderismo</h3>
+          <p>Rutas por la selva tropical</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="precios">
+      <h2>Precios y Servicios</h2>
+      <div class="pricing-table">
+        <div class="price-card">
+          <h3>Básico</h3>
+          <p class="price">1999€</p>
+          <ul>
+            <li>Vuelo Madrid-Vanuatu</li>
+            <li>7 días de alojamiento</li>
+            <li>Pensión completa</li>
+            <li>Clases de inglés</li>
+            <li>Material didáctico</li>
+            <li>Actividades básicas</li>
+          </ul>
+          <a href="reservar.html?plan=basico" class="btn-reservar">Reservar</a>
+        </div>
+        <div class="price-card featured">
+          <h3>Premium</h3>
+          <p class="price">2499€</p>
+          <ul>
+            <li>Todo lo del plan básico</li>
+            <li>Traslados VIP</li>
+            <li>Todas las excursiones</li>
+            <li>Equipo de snorkel y deportivo</li>
+            <li>Seguro premium internacional</li>
+            <li>Kit de bienvenida exclusivo</li>
+          </ul>
+          <a href="reservar.html?plan=premium" class="btn-reservar">Reservar</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios">
+      <h2>Testimonios</h2>
+      <div class="testimonios-carousel">
+        <!-- Los testimonios se cargarán dinámicamente con JavaScript -->
+      </div>
+      
+      <!-- Nuevo formulario para añadir testimonios -->
+      <div class="add-testimonial-section">
+        <h3>¡Comparte tu experiencia!</h3>
+        <form id="testimonialForm" class="testimonial-form">
+          <div class="form-group">
+            <input type="text" id="testimonialName" required placeholder="Tu nombre">
+          </div>
+          <div class="form-group">
+            <input type="number" id="testimonialAge" required min="14" max="18" placeholder="Tu edad">
+          </div>
+          <div class="form-group">
+            <textarea id="testimonialText" required placeholder="Cuéntanos tu experiencia..."></textarea>
+          </div>
+          <div class="form-group rating-group">
+            <label>Valoración:</label>
+            <div class="star-rating">
+              <input type="radio" id="star5" name="rating" value="5" required><label for="star5">★</label>
+              <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+              <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+              <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+              <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+            </div>
+          </div>
+          <button type="submit" class="submit-testimonial">Enviar Testimonio</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="tienda">
+      <h2>Tienda Golden Oak</h2>
+      <div class="shop-grid">
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt="Camiseta Golden Oak">
+          <h3>Camiseta Golden Oak Camp</h3>
+          <p class="price">25€</p>
+          <p>Camiseta oficial del campamento en varios colores</p>
+          <div class="product-controls">
+            <div class="quantity-control">
+              <label for="quantity-Camiseta-Golden-Oak-Camp">Cantidad:</label>
+              <input type="number" id="quantity-Camiseta-Golden-Oak-Camp" min="1" value="1">
+            </div>
+            <button class="btn-comprar" onclick="addToCart('Camiseta Golden Oak Camp', 25)">Añadir al Carrito</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b" alt="Gorra Golden Oak">
+          <h3>Gorra Golden Oak</h3>
+          <p class="price">20€</p>
+          <p>Gorra ajustable con el logo del campamento</p>
+          <div class="product-controls">
+            <div class="quantity-control">
+              <label for="quantity-Gorra-Golden-Oak">Cantidad:</label>
+              <input type="number" id="quantity-Gorra-Golden-Oak" min="1" value="1">
+            </div>
+            <button class="btn-comprar" onclick="addToCart('Gorra Golden Oak', 20)">Añadir al Carrito</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62" alt="Mochila Aventura">
+          <h3>Mochila Aventura</h3>
+          <p class="price">45€</p>
+          <p>Mochila resistente al agua para excursiones</p>
+          <div class="product-controls">
+            <div class="quantity-control">
+              <label for="quantity-Mochila-Aventura">Cantidad:</label>
+              <input type="number" id="quantity-Mochila-Aventura" min="1" value="1">
+            </div>
+            <button class="btn-comprar" onclick="addToCart('Mochila Aventura', 45)">Añadir al Carrito</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carrito de compras -->
+      <div id="cart-modal" class="modal">
+        <div class="modal-content">
+          <h2>Carrito de Compras</h2>
+          <div id="cart-items"></div>
+          <div id="cart-total"></div>
+          <button id="checkout-btn" class="btn-confirmar">Finalizar Compra</button>
+        </div>
+      </div>
+
+      <!-- Botón flotante del carrito -->
+      <div id="cart-button" class="cart-floating-button">
+        🛒 <span id="cart-count">0</span>
+      </div>
+    </section>
+  </main>
+
+  <div id="blur-notice" class="blur-notice">
+    <h2>🔒 Accede para descubrir toda la experiencia Golden Oak</h2>
+  </div>
+
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Iniciar Sesión</h2>
+      <form id="loginForm">
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Contraseña" required>
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Registro</h2>
+      <form id="registerForm">
+        <input type="text" placeholder="Nombre" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Contraseña" required>
+        <input type="password" placeholder="Confirmar Contraseña" required>
+        <button type="submit">Registrarse</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="infoModal" class="info-modal">
+    <div class="info-modal-content">
+      <h2>Descubre la Experiencia Golden Oak en Vanuatu</h2>
+      
+      <div class="detailed-info">
+        <h3>🌴 Sobre el Destino</h3>
+        <p>Vanuatu, un archipiélago paradisíaco en el Pacífico Sur, ofrece una combinación única de belleza natural, cultura fascinante y aventuras inolvidables. Nuestro campamento se encuentra en Port Vila, la vibrante capital del país.</p>
+
+        <h3>📚 Programa Educativo</h3>
+        <p>Las clases de inglés son impartidas por profesores nativos cualificados en grupos reducidos de máximo 10 estudiantes. Utilizamos un método inmersivo que combina aprendizaje formal con actividades prácticas y situaciones reales.</p>
+
+        <h3>🎓 Metodología</h3>
+        <ul>
+          <li>4 horas diarias de clase con profesores nativos</li>
+          <li>Workshops temáticos en inglés</li>
+          <li>Actividades de conversación con locales</li>
+          <li>Proyectos culturales colaborativos</li>
+        </ul>
+
+        <h3>🏃‍♂️ Actividades y Excursiones</h3>
+        <p>Todas nuestras actividades están diseñadas para maximizar la práctica del inglés mientras disfrutas de experiencias únicas:</p>
+        <ul>
+          <li>Snorkel en los arrecifes de coral más prístinos del mundo</li>
+          <li>Excursiones al volcán Monte Yasur activo</li>
+          <li>Visitas culturales al Museo Nacional y poblados tradicionales</li>
+          <li>Clases de surf en las mejores playas</li>
+          <li>Kayak en aguas cristalinas</li>
+          <li>Senderismo por la selva tropical</li>
+        </ul>
+
+        <h3>🏠 Alojamiento</h3>
+        <p>Te alojarás en nuestro resort exclusivo con:</p>
+        <ul>
+          <li>Habitaciones compartidas modernas y confortables</li>
+          <li>Piscina y zonas de recreo</li>
+          <li>Wifi gratuito</li>
+          <li>Comidas preparadas por chefs locales</li>
+          <li>Seguridad 24/7</li>
+        </ul>
+
+        <h3>👥 Equipo y Supervisión</h3>
+        <p>Nuestro equipo incluye:</p>
+        <ul>
+          <li>Profesores nativos cualificados</li>
+          <li>Monitores bilingües 24/7</li>
+          <li>Personal médico en el campus</li>
+          <li>Guías locales expertos</li>
+        </ul>
+
+        <h3>✈️ Logística</h3>
+        <p>El programa incluye:</p>
+        <ul>
+          <li>Vuelos directos desde Madrid</li>
+          <li>Traslados aeropuerto-campamento</li>
+          <li>Seguro de viaje internacional</li>
+          <li>Todas las comidas y snacks</li>
+          <li>Material didáctico y deportivo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p>Email: info@goldenoak.com</p>
+        <p>Teléfono: +34 912 345 678</p>
+      </div>
+      <div class="footer-section">
+        <h3>Síguenos</h3>
+        <div class="social-links">
+          <a href="https://facebook.com/goldenoak"><i class="fab fa-facebook"></i></a>
+          <a href="https://instagram.com/goldenoak"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/goldenoak"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Golden Oak Camp. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!document.body.classList.contains('authenticated')) {
+        document.querySelector('.auth-welcome').style.display = 'block';
+      }
+    });
+  </script>
+
+  <script src="app.js"></script>
+</body>
+</html>
