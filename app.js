@@ -62,9 +62,9 @@ function openInfoModal() {
   }
 }
 
-// User management
-let currentUser = null;
-const users = new Map();
+// User management with localStorage
+let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+const users = new Map(JSON.parse(localStorage.getItem('users') || '[]'));
 
 function registerUser(name, email, password) {
   if (users.has(email)) {
@@ -77,6 +77,7 @@ function registerUser(name, email, password) {
   }
   
   users.set(email, { name, password });
+  localStorage.setItem('users', JSON.stringify(Array.from(users.entries())));
   showNotification(
     '¡Registro Exitoso! ',
     '¡Bienvenido a Golden Oak Camp!'
@@ -96,26 +97,7 @@ function loginUser(email, password) {
   }
   
   currentUser = { email, name: user.name };
-  
-  // Add authenticated class to body
-  document.body.classList.add('authenticated');
-  
-  // Show welcome overlay
-  const overlay = document.createElement('div');
-  overlay.className = 'welcome-overlay';
-  overlay.innerHTML = `
-    <div class="welcome-message">
-      <h1>¡Bienvenido, ${user.name}! 🎉</h1>
-      <p>Descubre toda la experiencia Golden Oak</p>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-  
-  setTimeout(() => {
-    overlay.addEventListener('animationend', () => {
-      overlay.remove();
-    });
-  }, 2000);
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
   
   showNotification(
     '¡Bienvenido! ',
@@ -125,6 +107,23 @@ function loginUser(email, password) {
   updateUIForUser();
   
   return true;
+}
+
+function logout() {
+  currentUser = null;
+  localStorage.removeItem('currentUser');
+  updateUIForUser();
+  
+  // Show logout notification
+  showNotification(
+    'Sesión Cerrada',
+    '¡Hasta pronto! Has cerrado sesión correctamente.'
+  );
+  
+  const dropdown = document.querySelector('.user-profile-dropdown');
+  if (dropdown) {
+    dropdown.classList.remove('active');
+  }
 }
 
 function updateUIForUser() {
@@ -138,8 +137,18 @@ function updateUIForUser() {
         button.style.display = 'none';
       }
     });
-    // Show profile button
-    profileBtn.style.display = 'block';
+    
+    // Update profile button with user name
+    profileBtn.style.display = 'flex';
+    const userNameDisplay = profileBtn.querySelector('.user-name-display');
+    if (!userNameDisplay) {
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'user-name-display';
+      nameSpan.textContent = currentUser.name; 
+      profileBtn.insertBefore(nameSpan, profileBtn.firstChild);
+    } else {
+      userNameDisplay.textContent = currentUser.name; 
+    }
   } else {
     // Show login/register buttons
     Array.from(authButtons.children).forEach(button => {
@@ -149,16 +158,23 @@ function updateUIForUser() {
     });
     // Hide profile button
     profileBtn.style.display = 'none';
+    const userNameDisplay = profileBtn.querySelector('.user-name-display');
+    if (userNameDisplay) {
+      userNameDisplay.remove();
+    }
   }
 }
 
-function logout() {
-  currentUser = null;
-  updateUIForUser();
-  document.body.classList.remove('authenticated');
-  const dropdown = document.querySelector('.user-profile-dropdown');
-  if (dropdown) {
-    dropdown.classList.remove('active');
+// Add new function to delete account
+function deleteAccount() {
+  if (currentUser && confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.')) {
+    users.delete(currentUser.email);
+    localStorage.setItem('users', JSON.stringify(Array.from(users.entries())));
+    logout();
+    showNotification(
+      'Cuenta Eliminada',
+      'Tu cuenta ha sido eliminada correctamente'
+    );
   }
 }
 
@@ -213,6 +229,28 @@ function removeFromCart(index) {
   updateCartCount();
 }
 
+// Add new function to clear cart
+function clearCart() {
+  if (cart.length === 0) {
+    showNotification(
+      'Carrito Vacío',
+      'No hay productos que eliminar',
+      'error'
+    );
+    return;
+  }
+  
+  if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+    cart = [];
+    updateCartDisplay();
+    updateCartCount();
+    showNotification(
+      'Carrito Vaciado',
+      'Se han eliminado todos los productos del carrito'
+    );
+  }
+}
+
 function updateCartDisplay() {
   const cartItems = document.getElementById('cart-items');
   const cartTotal = document.getElementById('cart-total');
@@ -249,6 +287,14 @@ function updateCartDisplay() {
         <span>Total:</span>
         <span class="cart-total-amount">${total.toFixed(2)}€</span>
       </div>
+      <div class="cart-actions">
+        <button onclick="clearCart()" class="clear-cart-btn">
+          🗑️ Vaciar Carrito
+        </button>
+        <button id="checkout-btn" onclick="checkout()">
+          ✨ Finalizar Compra ✨
+        </button>
+      </div>
     `;
   }
 }
@@ -277,16 +323,29 @@ function checkout() {
     return;
   }
   
-  const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
-  showNotification(
-    '¡Compra Exitosa! ',
-    `Tu pedido por ${total}€ ha sido procesado. ¡Gracias por tu compra!`
-  );
-  
-  cart = [];
-  updateCartCount();
-  updateCartDisplay();
-  document.getElementById('cart-modal').style.display = 'none';
+  const checkoutBtn = document.getElementById('checkout-btn');
+  if (checkoutBtn) {
+    checkoutBtn.style.transform = 'scale(0.95)';
+    checkoutBtn.style.opacity = '0.8';
+    setTimeout(() => {
+      checkoutBtn.style.transform = 'scale(1)';
+      checkoutBtn.style.opacity = '1';
+      
+      const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+      showNotification(
+        '¡Compra Exitosa! ✨',
+        `Tu pedido por ${total.toFixed(2)}€ ha sido procesado. ¡Gracias por tu compra!`
+      );
+      
+      cart = [];
+      updateCartCount();
+      updateCartDisplay();
+      
+      setTimeout(() => {
+        document.getElementById('cart-modal').style.display = 'none';
+      }, 1000);
+    }, 200);
+  }
 }
 
 // Image interaction
@@ -335,24 +394,11 @@ function toggleProfileDropdown() {
   dropdown.classList.toggle('active');
 }
 
-function editProfile() {
-  alert('Función de editar perfil en desarrollo');
-}
-
-function changePassword() {
-  alert('Función de cambiar contraseña en desarrollo');
-}
-
-function viewBookings() {
-  alert('Función de ver reservas en desarrollo');
-}
-
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
   if (currentUser) {
-    document.body.classList.add('authenticated');
+    updateUIForUser();
   }
-  
   cargarTestimonios();
   setupImageInteractions();
 

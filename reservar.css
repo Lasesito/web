@@ -263,7 +263,7 @@
   100% { transform: scale(1); }
 }
 
-.tachado {
+.precio-original.tachado {
   text-decoration: line-through;
   color: #999;
   font-size: 1.2rem;
